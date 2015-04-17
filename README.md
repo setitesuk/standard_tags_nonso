@@ -69,8 +69,7 @@ Features:
 [X] SIL/TIL
 [ ] Repeat
 Text:
-M13 Short Insert Library of pUC {puc name}.
-',
+M13 Short Insert Library of pUC {puc name}.',
 
 'Type:
 [ ] Clone Information
@@ -103,8 +102,7 @@ Features:
 [ ] SIL/TIL
 [X] Repeat
 Text:
-Missing data. {x}bp of repeat Type {repeat type}.
-',
+Missing data. {x}bp of repeat Type {repeat type}.',
 
 'Type:
 [ ] Clone Information
