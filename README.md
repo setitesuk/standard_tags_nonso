@@ -8,6 +8,7 @@ Below are a set of standard annotation tags as may be used on some DNA sequence 
 What we would like you to do is to write a single web page app which displays the list, using JavaScript to order it grouped by either Clone Information or Feature. The list has been provided in a JSON object that you should assume is the return of an AJAX call, and use it as such.
 
 The annotation tags are already in the index.html page which you should work in.
+The formatting in the markdown of this README file may display this in a way not intended, so the file for you to work in has been set up and the JSON object imported.
 
 The app should also ask the user to search for a tag, allow them to change the information in {} i.e. {clone name} and return it to them in a way that they can cleanly cut and paste into a text box within another application (do not assume that application to be web based).
 
@@ -15,7 +16,7 @@ You may use any js and css libraries you wish (i.e. jQuery or Bootstrap). Either
 
 Annotation Tags
 ===============
-<pre>
+
 { "annotation_tags": [
 'Type:
 [X] Clone Information
@@ -126,7 +127,7 @@ Features:
 Text:
 Sequence clone length {x}bp'
 ]}
-</pre>
+
 User acceptance tests
 ---------------------
 
