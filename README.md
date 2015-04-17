@@ -15,7 +15,7 @@ The app should also ask the user to search for a tag, allow them to change the i
 You may use any js and css libraries you wish (i.e. jQuery or Bootstrap). Either import them into the repository, or put in a link to the source such that on page load it will bring them in. The page will be run in an HTML5 compliant browser.
 
 Annotation Tags
-===============
+---------------
 
 { "annotation_tags": [
 'Type:
