@@ -16,114 +16,114 @@ You may use any js and css libraries you wish (i.e. jQuery or Bootstrap). Either
 Annotation Tags
 ===============
 
-{ "annotation_tags": [
-'Type:
-[X] Clone Information
-[ ] Feature
-Features:
-[X] Start/End
-[ ] Single Clone Region
-[ ] SIL/TIL
-[ ] Repeat
-Text:
+{ "annotation_tags": [<br/>
+'Type:<br/>
+[X] Clone Information<br/>
+[ ] Feature<br/>
+Features:<br/>
+[X] Start/End<br/>
+[ ] Single Clone Region<br/>
+[ ] SIL/TIL<br/>
+[ ] Repeat<br/>
+Text:<br/>
 This is the start of sequence clone {clone name}.',
 
-'Type:
-[ ] Clone Information
-[X] Feature
-Features:
-[ ] Start/End
-[X] Single Clone Region
-[ ] SIL/TIL
-[ ] Repeat
+'Type:<br/>
+[ ] Clone Information<br/>
+[X] Feature<br/>
+Features:<br/>
+[ ] Start/End<br/>
+[X] Single Clone Region<br/>
+[ ] SIL/TIL<br/>
+[ ] Repeat<br/>
 Text:',
 
-'Type:
-[ ] Clone Information
-[X] Feature
-Features:
-[ ] Start/End
-[ ] Single Clone Region
-[ ] SIL/TIL
-[X] Repeat
-Text:
+'Type:<br/>
+[ ] Clone Information<br/>
+[X] Feature<br/>
+Features:<br/>
+[ ] Start/End<br/>
+[ ] Single Clone Region<br/>
+[ ] SIL/TIL<br/>
+[X] Repeat<br/>
+Text:<br/>
 This repeat is of Type {repeat type}. It has a length of {x}bp.',
 
-'Type:
-[X] Clone Information
-[ ] Feature
-Features:
-[X] Start/End
-[ ] Single Clone Region
-[ ] SIL/TIL
-[ ] Repeat
-Text:
+'Type:<br/>
+[X] Clone Information<br/>
+[ ] Feature<br/>
+Features:<br/>
+[X] Start/End<br/>
+[ ] Single Clone Region<br/>
+[ ] SIL/TIL<br/>
+[ ] Repeat<br/>
+Text:<br/>
 This is the end of sequence clone {clone name}.',
 
-'Type:
-[ ] Clone Information
-[X] Feature
-Features:
-[ ] Start/End
-[X] Single Clone Region
-[X] SIL/TIL
-[ ] Repeat
-Text:
+'Type:<br/>
+[ ] Clone Information<br/>
+[X] Feature<br/>
+Features:<br/>
+[ ] Start/End<br/>
+[X] Single Clone Region<br/>
+[X] SIL/TIL<br/>
+[ ] Repeat<br/>
+Text:<br/>
 M13 Short Insert Library of pUC {puc name}.',
 
-'Type:
-[ ] Clone Information
-[X] Feature
-Features:
-[ ] Start/End
-[X] Single Clone Region
-[X] SIL/TIL
-[ ] Repeat
-Text:
+'Type:<br/>
+[ ] Clone Information<br/>
+[X] Feature<br/>
+Features:<br/>
+[ ] Start/End<br/>
+[X] Single Clone Region<br/>
+[X] SIL/TIL<br/>
+[ ] Repeat<br/>
+Text:<br/>
 pUC Short Insert Library of pUC {puc name}',
 
-'Type:
-[ ] Clone Information
-[X] Feature
-Features:
-[ ] Start/End
-[X] Single Clone Region
-[X] SIL/TIL
-[ ] Repeat
-Text:
+'Type:<br/>
+[ ] Clone Information<br/>
+[X] Feature<br/>
+Features:<br/>
+[ ] Start/End<br/>
+[X] Single Clone Region<br/>
+[X] SIL/TIL<br/>
+[ ] Repeat<br/>
+Text:<br/>
 Transposon Insertion Library of pUC {puc name}',
 
-'Type:
-[ ] Clone Information
-[X] Feature
-Features:
-[ ] Start/End
-[ ] Single Clone Region
-[ ] SIL/TIL
-[X] Repeat
-Text:
+'Type:<br/>
+[ ] Clone Information<br/>
+[X] Feature<br/>
+Features:<br/>
+[ ] Start/End<br/>
+[ ] Single Clone Region<br/>
+[ ] SIL/TIL<br/>
+[X] Repeat<br/>
+Text:<br/>
 Missing data. {x}bp of repeat Type {repeat type}.',
 
-'Type:
-[ ] Clone Information
-[X] Feature
-Features:
-[ ] Start/End
-[ ] Single Clone Region
-[ ] SIL/TIL
-[X] Repeat
-Text:
+'Type:<br/>
+[ ] Clone Information<br/>
+[X] Feature<br/>
+Features:<br/>
+[ ] Start/End<br/>
+[ ] Single Clone Region<br/>
+[ ] SIL/TIL<br/>
+[X] Repeat<br/>
+Text:<br/>
 ALU repeat of length {x}bp',
 
-'Type:
-[X] Clone Information
-[ ] Feature
-Features:
-[ ] Start/End
-[ ] Single Clone Region
-[ ] SIL/TIL
-[ ] Repeat
-Text:
+'Type:<br/>
+[X] Clone Information<br/>
+[ ] Feature<br/>
+Features:<br/>
+[ ] Start/End<br/>
+[ ] Single Clone Region<br/>
+[ ] SIL/TIL<br/>
+[ ] Repeat<br/>
+Text:<br/>
 Sequence clone length {x}bp'
 ]}
 
