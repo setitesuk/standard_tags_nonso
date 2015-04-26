@@ -19,10 +19,14 @@ information in `{}` i.e. `{clone name}` and return it to them in a way that
 they can cleanly cut and paste into a text box within another application 
 (do not assume that application to be web based).
 
-You may use any JS and CSS libraries you wish *(i.e. jQuery or Bootstrap)*. 
-Either import them into the repository, or put in a link to the source such 
-that on page load it will bring them in. 
-The page will be run in an HTML5 compliant browser.
+Once you have achieved this, we would like a script file which tests the page according to the User Acceptance Tests below. *(in the real environment, this would be coded first, but doesn't have to be here)*
+
+What you use to test is up to you, but we should either be able to run it from a command line, or within a browser extension (i.e. Selenium plugin for Firefox), and it should return some form of pass OK for each test, and inform any tests which fail. *(It isn't a requirement that all tests written pass, but that we see how the tests work)*
+
+You may use any libraries you wish *(i.e. jQuery or Bootstrap for the page, or choice of language for the tests)*. 
+For the webpage - either import them into the repository, or put in a link to the source such that on page load it will bring them in. (The page will be run in an HTML5 compliant browser). If you use a different source than Selenium IDE for your tests, please add a file of requirements to import before running, and instructions on how to do so.
+
+When you have completed this task, save to this external repository, and let us know.
 
 Annotation Tags
 ---------------
