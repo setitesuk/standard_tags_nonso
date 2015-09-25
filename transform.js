@@ -131,7 +131,7 @@ var tag_objs = annotation_tags['annotation_tags'].map(str_to_object);
 
 
 // Register our service to angular
-angular.module('AnnotationTagApp').service('transfromService', function(){
+angular.module('AnnotationTagApp').service('transformService', function(){
     this.get_tag_objs = function(){
         return tag_objs;         
     }
