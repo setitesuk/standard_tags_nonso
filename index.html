@@ -1,8 +1,31 @@
 <html lang="en">
 <head>
     <title>Annotation Tags</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <link rel="stylesheet" href="/node_modules/angular-material/angular-material.css">
 </head>
-<body>
-<h1>Nice</h1>
+<body ng-app="AnnotationTagApp">
+ 
+    <div ng-controller="TagController">
+        <h1>Annotation Tags</h1>
+        <input ng-model="variables.clone_name" ng-change="updateTags()"/>
+        <div ng-repeat="tag in scope_tags">
+            <p id="tag-type">Tag Type {{tag.Type}}</p>
+            <ul>
+                <li ng-repeat="feature in tag.Features">
+                    {{ feature }}
+                </li>
+            </ul>
+            <p>{{ tag.Text }}</p>
+        </div> 
+    </div>
+
+    <script src="/node_modules/angular/angular.js"></script> 
+    <script src="/node_modules/angular-aria/angular-aria.js"></script> 
+    <script src="/node_modules/angular-animate/angular-animate.js"></script> 
+    <script src="/node_modules/angular-material/angular-material.js"></script>
+    <script src="/controller.js"></script>
+    <script src="/transform.js"></script>
+    <script src="/directives.js"></script>
 </body>
 </html>

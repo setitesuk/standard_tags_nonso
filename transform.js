@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 
 var annotation_tags = { "annotation_tags": [
 'Type:\n[X] Clone Information\n[ ] Feature\nFeatures:\n[X] Start/End\n[ ] Single Clone Region\n[ ] SIL/TIL\n[ ] Repeat\nText:\nThis is the start of sequence clone {clone name}.',
@@ -81,30 +79,14 @@ var str_to_object = function(raw){
         // as produced above
 
             // But the current_key 'Text' needs further processing of its
-            // values which are then assigned directly i.e. no further objects
-            // like 'name' and 'bool_value' - in contrast with non-'Text' keys
-            // See below
             if (current_key == 'Text') {
 
-                // If the current key is 'Text' we can expect that variables
-                // are embedded in braces. So we search for these in the value
-                // and replace the spaces with '_' to make them usable as 
-                // variables e.g. {puc name} becomes {puc_name}
-                var in_braces = current_str.match(/{\w+(\s+\w+)*}/g);
-                for (j = 0; j < in_braces.length; j++){
-                    var brace_param = in_braces[j].replace(' ', '_');
-                    current_str = current_str.replace(in_braces[j], brace_param);
-                } 
-                // We then assign the result directly to current_key
+                // We assign directly to current_key
                 collect[current_key] = current_str;
 
              } else {
                 
-                // Otherwise we make the current_str a key in its own right
-                // with a name and a value that is either true or false 
-                // i.e. [X] or [ ].
-
-                // But first remove the preceeding [X] or [ ]
+                // Otherwise remove the preceeding [X] or [ ]
                 var for_name = current_str.slice(4, current_str.length);
                 
                 // If we find [X] in current string assign to current key
@@ -130,7 +112,7 @@ var str_to_object = function(raw){
 var tag_objs = annotation_tags['annotation_tags'].map(str_to_object);
 
 
-// Register our service to angular
+// Register tags as a service to angular
 angular.module('AnnotationTagApp').service('transformService', function(){
     this.get_tag_objs = function(){
         return tag_objs;         
