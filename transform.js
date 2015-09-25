@@ -14,13 +14,23 @@ var annotation_tags = { "annotation_tags": [
 'Type:\n[X] Clone Information\n[ ] Feature\nFeatures:\n[ ] Start/End\n[ ] Single Clone Region\n[ ] SIL/TIL\n[ ] Repeat\nText:\nSequence clone length {x}bp'
 ]};
 
-/* We can seperate the annotation into component attributes by directly using
-the index of the strings that represent the objects however if we need to add 
-more attributes in future the index will be wrong and our function blows up. 
+/*
+ We can seperate the annotation into component attributes by directly using
+the index of the strings that represent the objects. 
+However, if we need to add more attributes in future the index will be wrong 
+and our function blows up. 
 Therefore we will need to find a solution that is more extensible as long as we
-follow certain conventions. In this case the attributes are single word names
+follow certain conventions in the annotation tags. 
+
+In this case the attributes are single word names
 that end with colons ':' followed by all possible values represented with square
-brackets preceeding the values themselves, while the chosen values for the attributes are marked with uppercase 'X' inside the square brackets. */ 
+brackets preceeding the values themselves, while the chosen values for the 
+attributes are marked with uppercase 'X' inside the square brackets. 
+
+Furthermore, we should aim to return an object in the end that will have the 
+same architecture as we would prefer the annotation tags to be delivered from
+the server. This has the advantage that in future we can cleanly retire this transform service.
+*/ 
 
 var log = console.log;
 
@@ -63,7 +73,7 @@ var str_to_object = function(raw){
         // assign it as key to an object
         if (/^\w+:/.test(current_str)){
             var current_key = current_str.replace(':', '');
-            collect[current_key] = {}; 
+            collect[current_key] = []; 
         
         } else {
 
@@ -83,10 +93,10 @@ var str_to_object = function(raw){
                 var in_braces = current_str.match(/{\w+(\s+\w+)*}/g);
                 for (j = 0; j < in_braces.length; j++){
                     var brace_param = in_braces[j].replace(' ', '_');
-                    deep_key = current_str.replace(in_braces[j], brace_param);
+                    current_str = current_str.replace(in_braces[j], brace_param);
                 } 
                 // We then assign the result directly to current_key
-                collect[current_key] = deep_key;
+                collect[current_key] = current_str;
 
              } else {
                 
@@ -96,17 +106,20 @@ var str_to_object = function(raw){
 
                 // But first remove the preceeding [X] or [ ]
                 var for_name = current_str.slice(4, current_str.length);
-
-                // Then strip spaces and remove '/' to make fully
-                // qualified property names
-                var deep_key = for_name.replace(/ /g, '').replace(/\//g, '');
                 
-                // Associate the properties so obtained with an object with keys
-                // 'name' and 'bool_value'
-                collect[current_key][deep_key] = {
-                    'name': for_name,
-                    'bool_value': bool_value(current_str)
-                };
+                // If we find [X] in current string assign to current key
+                // If current key is 'Type' assign directly if not push to array
+                if (bool_value(current_str)) {
+                    if (current_key == 'Type') {
+                        collect[current_key] = for_name;
+                    } else { 
+                        collect[current_key].push(for_name); 
+                    }
+                // Otherwise do nothing
+                } else {
+                   // log('Feature ' + for_name + ' is not included in ' +
+                   // current_key + '. Pass') 
+                } 
             }
         };
     }
@@ -116,4 +129,11 @@ var str_to_object = function(raw){
 // We can now map our str_to_object function to the annotation_tags list
 var tag_objs = annotation_tags['annotation_tags'].map(str_to_object);
 
-log(tag_objs[0].Features.StartEnd.bool_value);
+
+// Register our service to angular
+angular.module('AnnotationTagApp').service('transfromService', function(){
+    this.get_tag_objs = function(){
+        return tag_objs;         
+    }
+});
+
