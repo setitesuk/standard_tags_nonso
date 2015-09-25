@@ -44,7 +44,7 @@ var bool_value = function(str){
 var str_to_object = function(raw){
     /*
     We make a function that accepts units of annotation tags
-    and transforms it into a usable object
+    and transforms them into objects
     */
 
     var collect = {}
@@ -59,22 +59,27 @@ var str_to_object = function(raw){
         var current_str = splitted[i]
 
         // If the current string is a word that ends with a ':'
-        // then this is a property. Remove the ':' and 'initialize'
-        // it as key to an object
+        // then this is a property. Remove the ':' and 
+        // assign it as key to an object
         if (/^\w+:/.test(current_str)){
             var current_key = current_str.replace(':', '');
             collect[current_key] = {}; 
         
-        // If there's no ':' then this is a value to the current_key
-        // We should save it as such
         } else {
 
+        // If there's no ':' then this is a value to the current_key
+        // as produced above
+
+            // But the current_key 'Text' needs further processing of its
+            // values which are then assigned directly i.e. no further objects
+            // like 'name' and 'bool_value' - in contrast with non-'Text' keys
+            // See below
             if (current_key == 'Text') {
 
                 // If the current key is 'Text' we can expect that variables
                 // are embedded in braces. So we search for these in the value
                 // and replace the spaces with '_' to make them usable as 
-                // variables
+                // variables e.g. {puc name} becomes {puc_name}
                 var in_braces = current_str.match(/{\w+(\s+\w+)*}/g);
                 for (j = 0; j < in_braces.length; j++){
                     var brace_param = in_braces[j].replace(' ', '_');
@@ -83,13 +88,25 @@ var str_to_object = function(raw){
                 // We then assign the result directly to current_key
                 collect[current_key] = deep_key;
 
-            } else {
+             } else {
                 
-                // Otherwise we make the deep_key a key in its own right and 
-                // a value that is either true or false i.e. [X] or [ ].
+                // Otherwise we make the current_str a key in its own right
+                // with a name and a value that is either true or false 
+                // i.e. [X] or [ ].
+
                 // But first remove the preceeding [X] or [ ]
-                var deep_key = current_str.slice(4, current_str.length);
-                collect[current_key][deep_key] = bool_value(current_str);
+                var for_name = current_str.slice(4, current_str.length);
+
+                // Then strip spaces and remove '/' to make fully
+                // qualified property names
+                var deep_key = for_name.replace(/ /g, '').replace(/\//g, '');
+                
+                // Associate the properties so obtained with an object with keys
+                // 'name' and 'bool_value'
+                collect[current_key][deep_key] = {
+                    'name': for_name,
+                    'bool_value': bool_value(current_str)
+                };
             }
         };
     }
@@ -99,5 +116,4 @@ var str_to_object = function(raw){
 // We can now map our str_to_object function to the annotation_tags list
 var tag_objs = annotation_tags['annotation_tags'].map(str_to_object);
 
-
-log(tag_objs);
+log(tag_objs[0].Features.StartEnd.bool_value);
