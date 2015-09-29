@@ -47,7 +47,7 @@
                             <md-card>
                                 <md-card-content>
                                     <textarea value="This is great" rows="10" cols="20" id="paste-content">
-                                        This is the stuff of legend
+                                      
                                     </textarea>
                                 <md_card-content>
                             </md-card>
@@ -67,6 +67,7 @@
                                     Search / Modify
                                 </md-button>
                             </div>
+                            <div>
                             <md-list-item class="md-3-line" id="tagList" ng-repeat="tag in scope_tags | 
                                 orderBy:'+Type' | filter:searchText">
                                 <div class="md-list-item-text">
@@ -74,7 +75,7 @@
                                     <div layout="row">
                                         <md-subheader class="md-no-sticky">Features:</md-subheader>
                                         <ul ng-repeat="feature in tag.Features">
-                                            <li><p>{{ feature }}</p></li>
+                                            <li id="feature-list"><p>{{ feature }}</p></li>
                                         </ul>
                                     </div>
                                     
@@ -82,6 +83,7 @@
                                 </div>
                              <md-divider ></md-divider>
                             </md-list-item>
+                            </div>
                         </md-list>
                     </md-content>
                 </div>
