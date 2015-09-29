@@ -1,14 +1,15 @@
 
 var AnnotationTagApp = angular.module('AnnotationTagApp', ['ngMaterial']);
 
-AnnotationTagApp.controller("TagController", function($scope, transformService){
+AnnotationTagApp.controller("TagController", function(
+    $scope, $timeout, $mdSidenav, $mdUtil, $log, transformService){
     var tags = transformService.get_tag_objs();
     $scope.x = 234;
     $scope.variables = {
-        repeat_type: 'Ribonucleic Acid',
-        clone_name: 'Dolly',
-        puc_name: 'IC25U',
-        x: 234
+        repeat_type: {name:'Repeat Type', value:'Ribonucleic Acid'}, 
+        clone_name: {name:'Clone Name', value:'Dolly'},
+        puc_name: {name: 'PUC Name', value: 'IC25U'},
+        x: {name: 'Number', value: 234}
     };
     var updateTags = function () {
         var copy_tags = angular.copy(tags);
@@ -23,7 +24,7 @@ AnnotationTagApp.controller("TagController", function($scope, transformService){
                 for (j = 0; j < in_braces.length; j++){
                     var brace_param = in_braces[j].replace(' ', '_').replace('{', '');
                     brace_param = brace_param.replace('}', '');
-                    scope_value = $scope.variables[brace_param];
+                    scope_value = $scope.variables[brace_param]['value'];
                     current_str = current_str.replace(in_braces[j], scope_value);
                 }
             } else {
@@ -35,5 +36,37 @@ AnnotationTagApp.controller("TagController", function($scope, transformService){
     };
     updateTags();
     $scope.updateTags = updateTags;
-});
+    $scope.toggleLeft = buildToggler('left');
+    /**
+     * Build handler to open/close a SideNav; when animation finishes
+     * report completion in console
+     */
+    function buildToggler(navID) {
+      var debounceFn =  $mdUtil.debounce(function(){
+            $mdSidenav(navID)
+              .toggle()
+              .then(function () {
+                $log.debug("toggle " + navID + " is done");
+              });
+          },200);
+      return debounceFn;
+    }
+    $scope.close = function () {
+      $mdSidenav('left').close()
+        .then(function () {
+          $log.debug("close LEFT is done");
+        });
+    };
+})
+  .config( function($mdThemingProvider){
+    // Configure a dark theme with primary foreground yellow
+    $mdThemingProvider.theme('docs-dark', 'default')
+        .primaryPalette('yellow')
+        .dark();
+  });
+
+/*
+  .controller('LeftCtrl', function ($scope, $timeout, $mdSidenav, $log) {
+  });
+*/
 
