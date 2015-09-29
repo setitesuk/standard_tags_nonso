@@ -1,11 +1,12 @@
 """
 
 """
-
+import platform
 import unittest
 from selenium import webdriver
 from time import sleep
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
 
 
 class AcceptanceTests(unittest.TestCase):
@@ -14,6 +15,7 @@ class AcceptanceTests(unittest.TestCase):
     def setUp(self):
         self.browser = webdriver.Firefox()
         self.browser.implicitly_wait(3)
+        self.command_key = Keys.COMMAND if platform.mac_ver()[0] else Keys.CONTROL
 
     def tearDown(self):
         self.browser.quit()
@@ -45,19 +47,37 @@ class AcceptanceTests(unittest.TestCase):
         # Check that the tag returned is indeed the end tag
         end_tag = self.browser.find_element_by_id('tag-text')
         expected_text = "This is the end of sequence clone Dolly."
+
+        # Confirm that end_tag.text is correct
         self.assertEqual(end_tag.text, expected_text)
-        end_tag.send_keys(Keys.COMMAND, 'a')
+
+        # 
+        end_tag_feature = self.browser.find_element_by_id('feature-list')
+        actions = ActionChains(self.browser)
+        actions.move_to_element(end_tag_feature)
+        actions.click(end_tag_feature)
+        actions.perform()
         sleep(2)
-        # end_tag.send_keys(Keys.ARROW_DOWN)
-        end_tag.send_keys(Keys.COMMAND, 'c')
+        end_tag_feature.send_keys(self.command_key, 'a')
+        end_tag_feature.send_keys(self.command_key, 'c')
         paste_target = self.browser.find_element_by_id('paste-content')
         paste_target.clear()
-        paste_target.send_keys(Keys.COMMAND, 'v')
-        sleep(4)
+        paste_target.send_keys(self.command_key, 'v')
+        value = paste_target.get_attribute('value')
+        end_tag_feature = "Start/End"
+        print(Keys.CONTROL, "Key Control")
+        print(Keys.COMMAND, "Key Control")
+        self.assertIn(end_tag_feature, value)
 
-        self.assertIn(expected_text, paste_target.text.strip())
-        
+        # Text that is definitely not part of end tag should not appear
+        self.assertNotIn('start of', value)
 
+        ## Sanity Check
+        # Currently, selecting the target element 'end tag text' fails
+        # This means that text that are not in the target text but exist on the
+        # page are found when we paste in the text area
+        # This is a framework level problem (i.e. selenium)
+        self.assertNotIn('Annotation Tags', value)
 
 
 if __name__ == '__main__':
